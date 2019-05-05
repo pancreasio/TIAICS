@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private string bulletException;
 
     public GameObject bullet;
+    public int HP;
     private void Start()
     {
         rigi = transform.GetComponent<Rigidbody>();
@@ -74,5 +75,10 @@ public class Player : MonoBehaviour
         GameObject fireBullet = Instantiate(bullet, transform.position + transform.forward * bulletSpawnPhase, transform.rotation);
         fireBullet.tag = "PlayerBullet";
         fireBullet.GetComponent<Bullet>().exception = bulletException;
+    }
+
+    public void Damage(int damage)
+    {
+        HP -= damage;
     }
 }

@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 800
   activeTime: 3
-  damage: 1
+  damage: 100
   exception: 
 --- !u!54 &5518902660899592536
 Rigidbody:

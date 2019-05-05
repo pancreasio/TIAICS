@@ -33,6 +33,12 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(HP);
+        if (HP <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+
         if (player != null)
         {
             float dist = Vector3.Distance(player.transform.position, this.transform.position);
@@ -83,5 +89,10 @@ public class Enemy : MonoBehaviour
         GameObject fireBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z + bulletSpawnPhase), transform.rotation);
         fireBullet.tag = "PlayerBullet";
         fireBullet.GetComponent<Bullet>().exception = bulletException;
+    }
+
+    public void Damage(int damage)
+    {
+        HP --;
     }
 }

@@ -115,6 +115,7 @@ MonoBehaviour:
   bulletSpawnPhase: 5
   roundsPerSecond: 10
   bullet: {fileID: 6068968080857248012, guid: 623b076b67913a246aee09b5ea542cd2, type: 3}
+  HP: 3
 --- !u!54 &4541746341546210553
 Rigidbody:
   m_ObjectHideFlags: 0

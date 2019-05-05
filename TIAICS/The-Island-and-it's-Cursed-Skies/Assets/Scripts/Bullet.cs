@@ -37,8 +37,14 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag != exception)
         {
-            Debug.Log("exc ");
-            Debug.Log("trig ");
+            if (other.transform.tag=="Enemy")
+            {
+                other.GetComponent<Enemy>().Damage(damage);
+            }
+            if (other.transform.tag == "Player")
+            {
+                other.GetComponent<Player>().Damage(damage);
+            }
             if (collisionAction != null)
             {
                 collisionAction(damage);
