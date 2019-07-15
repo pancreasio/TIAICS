@@ -11,14 +11,16 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public LevelManager levelManager;
     public Text altitudeText, speedText;
+    public Camera chaseCam, fpsCam;
     public int HP;
-    private bool dashing;
+    private bool dashing, fps;
 
     private void Start()
     {
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
         rigi = GetComponent<Rigidbody>();
         fireClock = 0;
+        fps = true;
     }
 
     private void Update()
@@ -55,6 +57,23 @@ public class Player : MonoBehaviour
         else
         {
             dashing = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            fps = !fps;
+        }
+
+        if (fps)
+        {
+            fpsCam.gameObject.SetActive(true);
+            chaseCam.gameObject.SetActive(false);
+        }
+
+        else
+        {
+            fpsCam.gameObject.SetActive(false);
+            chaseCam.gameObject.SetActive(true);
         }
 
         altitudeText.text = "Altitude: " + Mathf.Round(transform.position.y * 3).ToString() + "m";

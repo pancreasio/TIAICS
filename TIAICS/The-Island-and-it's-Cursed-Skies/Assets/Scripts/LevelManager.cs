@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     private int deadEnemies, totalEnemies;
     private GameManager gameManager;
     private GameObject[] enemyArray;
-    private List<GameObject> enemyList;
+    private List<GameObject> enemyList, toDelete;
 
     private void Start()
     {
@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
         gameManager.UpdateCurrent();
         gameManager.SetRetryLevel();
         enemyList = new List<GameObject>();
+        toDelete = new List<GameObject>();
         foreach (GameObject enemy in enemyArray)
         {
             enemyList.Add(enemy);
@@ -38,8 +39,13 @@ public class LevelManager : MonoBehaviour
             {
                 deadEnemies++;
                 GameManager.score += 100;
-                enemyList.Remove(enemy);
+                toDelete.Add(enemy);
             }
+        }
+
+        foreach (GameObject enemy in toDelete)
+        {
+            enemyList.Remove(enemy);
         }
 
 
@@ -47,7 +53,6 @@ public class LevelManager : MonoBehaviour
         {
             NextLevel();
         }
-        Debug.Log("Total Enemies: " + totalEnemies + "  Dead Enemies: " + deadEnemies);
         scoreText.text = "Score: " +  Mathf.Round(GameManager.score).ToString() + " UR$$";
         timeText.text = "Time: " + Mathf.Round(levelTime).ToString() + "s";
     }
