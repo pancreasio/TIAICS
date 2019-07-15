@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene(3);
-        currentScene = SceneManager.GetSceneByBuildIndex(3);
+        SceneManager.LoadScene(4);
+        currentScene = SceneManager.GetSceneByBuildIndex(4);
     }
 
     public void Menu()

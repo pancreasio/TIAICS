@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag != "PlayerBullet")
+        if (collision.transform.tag == "Terrain")
         {
             Destroy(this.gameObject);
         }

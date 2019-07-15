@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
         totalEnemies = enemyArray.Length;
         deadEnemies = 0;
         Cursor.visible = false;
+        gameManager.UpdateCurrent();
+        gameManager.SetRetryLevel();
     }
 
     private void Update()
@@ -43,6 +45,11 @@ public class LevelManager : MonoBehaviour
 
     private void NextLevel()
     {
+        gameManager.NextScene();
+    }
 
+    public void GameOver()
+    {
+        gameManager.GameOver();
     }
 }
