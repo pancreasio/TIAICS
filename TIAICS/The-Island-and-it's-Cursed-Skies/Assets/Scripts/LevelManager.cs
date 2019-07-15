@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public Text scoreText;
+    public Text scoreText, timeText;
     public bool levelEnded;
     private float lastWaveTime, levelTime;
     private int deadEnemies, totalEnemies;
@@ -22,25 +22,34 @@ public class LevelManager : MonoBehaviour
         Cursor.visible = false;
         gameManager.UpdateCurrent();
         gameManager.SetRetryLevel();
+        enemyList = new List<GameObject>();
+        foreach (GameObject enemy in enemyArray)
+        {
+            enemyList.Add(enemy);
+        }
     }
 
     private void Update()
     {
         levelTime += Time.deltaTime;
-        deadEnemies = 0;
-        foreach (GameObject enemy in enemyArray)
+        foreach (GameObject enemy in enemyList)
         {
             if (enemy == null)
             {
                 deadEnemies++;
+                GameManager.score += 100;
+                enemyList.Remove(enemy);
             }
         }
+
 
         if (deadEnemies >= totalEnemies)
         {
             NextLevel();
         }
         Debug.Log("Total Enemies: " + totalEnemies + "  Dead Enemies: " + deadEnemies);
+        scoreText.text = "Score: " +  Mathf.Round(GameManager.score).ToString() + " UR$$";
+        timeText.text = "Time: " + Mathf.Round(levelTime).ToString() + "s";
     }
 
     private void NextLevel()

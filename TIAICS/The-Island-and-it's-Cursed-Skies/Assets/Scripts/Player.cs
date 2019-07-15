@@ -8,17 +8,14 @@ public class Player : MonoBehaviour
     public float moveSpeed, xRotationSpeed, yRotationSpeed, zRotationSpeed, bulletSpawnPhase, roundsPerSecond, dashSpeed;
     private float rotateX, rotateY, rotateZ, fireClock;
     private Rigidbody rigi;
-    private GameObject cam;
-
-
     public GameObject bullet;
+    public Text altitudeText, scoreText;
     public int HP;
     private bool dashing;
 
     private void Start()
     {
-        rigi = transform.GetComponent<Rigidbody>();
-        cam = transform.GetComponentInChildren<Camera>().gameObject;
+        rigi = GetComponent<Rigidbody>();
         fireClock = 0;
     }
 

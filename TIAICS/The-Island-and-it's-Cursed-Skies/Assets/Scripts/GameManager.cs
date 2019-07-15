@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void Menu()
     {
+        score = 0;
         SceneManager.LoadScene(0);
         currentScene = SceneManager.GetSceneByBuildIndex(0);
     }
