@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public float moveSpeed, xRotationSpeed, yRotationSpeed, zRotationSpeed, bulletSpawnPhase, roundsPerSecond, dashSpeed;
     private float rotateX, rotateY, rotateZ, fireClock;
     private Rigidbody rigi;
-    public GameObject bullet;
+    public GameObject bullet, crosshair;
     public LevelManager levelManager;
     public Text altitudeText, speedText;
     public Camera chaseCam, fpsCam;
@@ -68,12 +68,14 @@ public class Player : MonoBehaviour
         {
             fpsCam.gameObject.SetActive(true);
             chaseCam.gameObject.SetActive(false);
+            crosshair.SetActive(true);
         }
 
         else
         {
             fpsCam.gameObject.SetActive(false);
             chaseCam.gameObject.SetActive(true);
+            crosshair.SetActive(false);
         }
 
         altitudeText.text = "Altitude: " + Mathf.Round(transform.position.y * 3).ToString() + "m";
