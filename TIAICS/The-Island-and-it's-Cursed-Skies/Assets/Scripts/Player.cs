@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private float rotateX, rotateY, rotateZ, fireClock;
     private Rigidbody rigi;
     public GameObject bullet;
-    public Text altitudeText, scoreText;
+    public Text altitudeText, speedText;
     public int HP;
     private bool dashing;
 
@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
         {
             dashing = false;
         }
+
+        altitudeText.text = "Altitude: " + Mathf.Round(transform.position.y * 3).ToString() + "m";
+        speedText.text = "Speed: " + Mathf.Round(rigi.velocity.magnitude*30).ToString() + " Km/h";
     }
 
     private void FixedUpdate()
