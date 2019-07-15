@@ -109,11 +109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 700
-  xRotationSpeed: 10
-  yRotationSpeed: 6
-  zRotationSpeed: 10
+  xRotationSpeed: 5
+  yRotationSpeed: 3
+  zRotationSpeed: 5
   bulletSpawnPhase: 5
   roundsPerSecond: 10
+  dashSpeed: 700
   bullet: {fileID: 6068968080857248012, guid: 623b076b67913a246aee09b5ea542cd2, type: 3}
   HP: 3
 --- !u!54 &4541746341546210553

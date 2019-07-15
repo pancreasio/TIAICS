@@ -7,12 +7,8 @@ public class Bullet : MonoBehaviour
     private float activeClock;
     private Rigidbody rigi;
 
-    public float speed;
-    public float activeTime;
+    public float speed, activeTime;
     public int damage;
-    public string exception;
-    public delegate void CollisionAction(int damage);
-    CollisionAction collisionAction;
 
     private void Start()
     {
@@ -35,20 +31,10 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != exception)
+
+        if (other.transform.tag == "Enemy")
         {
-            if (other.transform.tag=="Enemy")
-            {
-                other.GetComponent<Enemy>().Damage(damage);
-            }
-            if (other.transform.tag == "Player")
-            {
-                other.GetComponent<Player>().Damage(damage);
-            }
-            if (collisionAction != null)
-            {
-                collisionAction(damage);
-            }
+            other.GetComponent<Enemy>().Damage(damage);
             Destroy(this.gameObject);
         }
     }

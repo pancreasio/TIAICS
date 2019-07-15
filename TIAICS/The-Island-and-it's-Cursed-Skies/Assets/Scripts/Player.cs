@@ -5,44 +5,39 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    float moveSpeed;
-    [SerializeField]
-    float xRotationSpeed;
-    [SerializeField]
-    float yRotationSpeed;
-    [SerializeField]
-    float zRotationSpeed;
-    [SerializeField]
-    float bulletSpawnPhase;
-    [SerializeField]
-    float roundsPerSecond;
-
-    private float rotateX;
-    private float rotateY;
-    private float rotateZ;
-    private float fireClock;
+    public float moveSpeed, xRotationSpeed, yRotationSpeed, zRotationSpeed, bulletSpawnPhase, roundsPerSecond, dashSpeed;
+    private float rotateX, rotateY, rotateZ, fireClock;
     private Rigidbody rigi;
     private GameObject cam;
-    private string bulletException;
+
 
     public GameObject bullet;
     public int HP;
+    private bool dashing;
+
     private void Start()
     {
         rigi = transform.GetComponent<Rigidbody>();
         cam = transform.GetComponentInChildren<Camera>().gameObject;
         fireClock = 0;
-        bulletException= "Player";
     }
 
     private void Update()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        rotateX = -Input.GetAxisRaw("Mouse Y");
-        rotateY = -Input.GetAxisRaw("Horizontal");
-        rotateZ =Input.GetAxis("Mouse X");
+        if (!dashing)
+        {
+            rotateX = -Input.GetAxisRaw("Mouse Y");
+            rotateY = -Input.GetAxisRaw("Horizontal");
+            rotateZ = Input.GetAxis("Mouse X");
+        }
+        else
+        {
+            rotateX = 0.0f;
+            rotateY = 0.0f;
+            rotateZ = 0.0f;
+        }
 
         fireClock += Time.deltaTime;
         if (fireClock >= 1/roundsPerSecond)
@@ -53,11 +48,24 @@ public class Player : MonoBehaviour
             }
             fireClock = 0;
         }
+
+        if (Input.GetMouseButton(1))
+        {
+            dashing = true;
+        }
+        else
+        {
+            dashing = false;
+        }
     }
 
     private void FixedUpdate()
     {
         rigi.AddForce(transform.forward * moveSpeed, ForceMode.Acceleration);
+        if (dashing)
+        {
+            rigi.AddForce(transform.forward * dashSpeed, ForceMode.Acceleration);
+        }
         transform.Rotate(new Vector3(rotateX*xRotationSpeed, rotateZ * zRotationSpeed,rotateY*yRotationSpeed));
     }
 
@@ -74,7 +82,6 @@ public class Player : MonoBehaviour
     {
         GameObject fireBullet = Instantiate(bullet, transform.position + transform.forward * bulletSpawnPhase, transform.rotation);
         fireBullet.tag = "PlayerBullet";
-        fireBullet.GetComponent<Bullet>().exception = bulletException;
     }
 
     public void Damage(int damage)

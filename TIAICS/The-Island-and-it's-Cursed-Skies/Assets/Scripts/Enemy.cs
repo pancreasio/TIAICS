@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    float viewDistance;
-    [SerializeField]
-    float shootDistance;
-    [SerializeField]
-    float idleRotationRate;
-    [SerializeField]
-    float bulletSpawnPhase;
-    [SerializeField]
-    float speed;
+    public float viewDistance, shootDistance, idleRotationRate, bulletSpawnPhase, speed;
     public GameObject player;
 
-    private string bulletException;
     enum enemyState
     {
         idle, chase, combat,
@@ -27,13 +17,12 @@ public class Enemy : MonoBehaviour
     public GameObject bullet;
     void Start()
     {
+        player = GameObject.Find("Player");
         currentState = enemyState.idle;
-        bulletException = "Enemy";
     }
 
     void Update()
     {
-        Debug.Log(HP);
         if (HP <= 0)
         {
             Destroy(this.gameObject);
@@ -88,7 +77,6 @@ public class Enemy : MonoBehaviour
     {
         GameObject fireBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z + bulletSpawnPhase), transform.rotation);
         fireBullet.tag = "PlayerBullet";
-        fireBullet.GetComponent<Bullet>().exception = bulletException;
     }
 
     public void Damage(int damage)
