@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/archipielago.unity
     guid: 150f1888cafe9924b8b9836909a0fbf1
   - enabled: 1
-    path: Assets/Scenes/island 2.unity
+    path: Assets/Scenes/cursed land.unity
     guid: 7118f6046aef29248bcf0d54b920b3fd
   - enabled: 1
     path: Assets/Scenes/Game Over.unity
