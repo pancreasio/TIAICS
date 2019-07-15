@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Terrain")
+        if (collision.transform.tag == "Terrain" || collision.transform.tag == "Enemy")
         {
             levelManager.GameOver();
         }
