@@ -25,14 +25,24 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         levelTime += Time.deltaTime;
+        deadEnemies = 0;
         foreach (GameObject enemy in enemyArray)
         {
-            Destroy(enemy.gameObject);
             if (enemy == null)
             {
                 deadEnemies++;
             }
         }
-        Debug.Log("Total Enemies: " + totalEnemies + "  Dead Enemies" + deadEnemies);
+
+        if (deadEnemies >= totalEnemies)
+        {
+            NextLevel();
+        }
+        Debug.Log("Total Enemies: " + totalEnemies + "  Dead Enemies: " + deadEnemies);
+    }
+
+    private void NextLevel()
+    {
+
     }
 }
