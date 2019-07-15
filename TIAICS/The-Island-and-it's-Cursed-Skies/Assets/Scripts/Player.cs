@@ -9,12 +9,14 @@ public class Player : MonoBehaviour
     private float rotateX, rotateY, rotateZ, fireClock;
     private Rigidbody rigi;
     public GameObject bullet;
+    public LevelManager levelManager;
     public Text altitudeText, speedText;
     public int HP;
     private bool dashing;
 
     private void Start()
     {
+        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
         rigi = GetComponent<Rigidbody>();
         fireClock = 0;
     }
@@ -73,7 +75,7 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.tag == "Terrain")
         {
-            Destroy(this.gameObject);
+            levelManager.GameOver();
         }
         
     }
